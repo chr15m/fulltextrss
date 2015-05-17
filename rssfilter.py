@@ -147,6 +147,9 @@ def builtin_main(feed, url_filters=[], title_filters=[], operation="OR"):
     from either OR or AND. It ensures only one or two total filters are given,
     composes them as instructed by operation, and then fetches and filters the
     feed accordingly, returning the filtered, pretty-printed stream.
+    The function responsible for terminal usage is _cli_main which just parses
+    args and passes them here: breaking these up allows this function to be
+    used trivially in a web-app context.
     """
     title_filters = list(map(in_title_filter, title_filters))
     url_filters = list(map(in_url_filter, url_filters))

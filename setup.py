@@ -28,6 +28,6 @@ setup(
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Text Processing',
     'Topic :: Utilities'],
-    long_description = open('ReadMegit .md').read(),
+    long_description = open('ReadMe.md').read(),
     url='http://github.com/cathalgarvey/rssfilter'
 )
