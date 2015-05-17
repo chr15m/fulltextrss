@@ -1,0 +1,6 @@
+build
+dist
+__pycache__
+rssfilter.egg-info
+flask_app.py
+flask_app.py
