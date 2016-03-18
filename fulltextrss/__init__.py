@@ -105,7 +105,7 @@ def builtin_main(feed_url):
             else:
                 sys.stderr.write("Unable to fetch: %s\n" % url)
     feedstr = o.writeString("utf-8")
-    feedstr = bs4.BeautifulSoup(feedstr, 'xml').prettify()
+    feedstr = bs4.BeautifulSoup(feedstr, 'xml').prettify().encode("utf-8", "ignore")
     return feedstr
 
 def _cli_main():
