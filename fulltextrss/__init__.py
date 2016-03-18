@@ -11,7 +11,7 @@ import urllib2
 import bs4
 import feedgenerator
 import feedparser
-from readability.readability import Document
+from newspaper import fulltext
 
 class FeedFetchError(Exception):
     "Thrown when something goes awry fetching or parsing the original feed."
@@ -81,7 +81,7 @@ def builtin_main(feed_url):
         # fake our user agent because some sites are crybabies
         req = urllib2.Request(i["link"], None, {'User-Agent': 'Mozilla/5.0'})
         html = urllib2.urlopen(req).read()
-        i["description"] = Document(html).summary()
+        i["description"] = fulltext(html)
         o.add_item( **i )
     feedstr = o.writeString("utf-8")
     feedstr = bs4.BeautifulSoup(feedstr, 'xml').prettify()

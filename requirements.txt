@@ -1,4 +1,4 @@
 bs4==0.0.1
 feedgenerator==1.7
 feedparser==5.2.1
-readability-lxml==0.6.1
+newspaper==0.0.9.8
