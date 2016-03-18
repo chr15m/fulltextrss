@@ -78,11 +78,31 @@ def builtin_main(feed_url):
     description = f['feed'].pop('description')
     o = feedgenerator.Rss201rev2Feed(title, link, description, **f['feed'])
     for i in f['entries']:
-        # fake our user agent because some sites are crybabies
-        req = urllib2.Request(i["link"], None, {'User-Agent': 'Mozilla/5.0'})
-        html = urllib2.urlopen(req).read()
-        i["description"] = fulltext(html)
-        o.add_item( **i )
+        url = i["link"]
+        # if we're looking at a reddit site ignore their
+        # broken link structure and use their [link] link (*facepalm*)
+        if "reddit.com/r/" in link:
+            original_html = i.get("description", None) or i.get("summary", None)
+            s = bs4.BeautifulSoup(original_html)
+            for a in s.find_all('a', href=True):
+                if a.contents == [u"[link]"] and a.get("href"):
+                    url = a.get("href")
+        if url:
+            # fake our user agent because some sites are crybabies
+            req = urllib2.Request(url, None, {'User-Agent': 'Mozilla/5.0'})
+            html = urllib2.urlopen(req).read()
+            if html:
+                try:
+                    i["description"] = fulltext(html)
+                except:
+                    sys.stderr.write("Unable to parse: %s\n" % url)
+                else:
+                    try:
+                        o.add_item( **i )
+                    except:
+                        sys.stderr.write("Unable to add: %s\n" % url)
+            else:
+                sys.stderr.write("Unable to fetch: %s\n" % url)
     feedstr = o.writeString("utf-8")
     feedstr = bs4.BeautifulSoup(feedstr, 'xml').prettify()
     return feedstr
