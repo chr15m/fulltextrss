@@ -18,6 +18,7 @@ setup(
     exclude_package_data={'': ['.gitignore']},
     packages=['fulltextrss'],
     requires=['feedgenerator', 'feedparser', 'bs4', 'lxml', 'newspaper'],
+    install_requires=['feedgenerator', 'feedparser', 'bs4', 'lxml', 'newspaper'],
     classifiers= [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
