@@ -87,6 +87,7 @@ def builtin_main(feed_url):
             for a in s.find_all('a', href=True):
                 if a.contents == [u"[link]"] and a.get("href"):
                     url = a.get("href")
+                    break
         if url:
             # fake our user agent because some sites are crybabies
             req = urllib2.Request(url, None, {'User-Agent': 'Mozilla/5.0'})
