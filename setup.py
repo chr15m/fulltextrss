@@ -3,21 +3,21 @@
 from setuptools import setup
 
 setup(
-    name='rssfilter',
+    name='fulltextrss',
     version='0.0.1',
-    description='Fetch, filter, and re-render RSS feeds for more useful consumption.',
-    author='Cathal Garvey',
-    author_email='cathalgarvey@cathalgarvey.me',
-    keywords=('rss', 'atom', 'feed', 'subscription', 'filter', 'regex', 'web', 'news'),
+    description='Re-render RSS feeds with full-text articles.',
+    author='Chris McCormick',
+    author_email='chris@mccormick.cx',
+    keywords=('rss', 'atom', 'feed', 'subscription', 'filter', 'fulltextrss', 'web', 'news'),
     license = "AGPL",
     entry_points = {
         "console_scripts": [
-            'rssfilter = rssfilter:_cli_main'
+            'fulltextrss = fulltextrss:_cli_main'
         ]
     },
     exclude_package_data={'': ['.gitignore']},
-    packages=['rssfilter'],
-    requires=['feedgenerator', 'feedparser', 'bs4', 'lxml'],
+    packages=['fulltextrss'],
+    requires=['feedgenerator', 'feedparser', 'bs4', 'lxml', 'newspaper'],
     classifiers= [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
@@ -28,6 +28,6 @@ setup(
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Text Processing',
     'Topic :: Utilities'],
-    long_description = open('ReadMe.md').read(),
-    url='http://github.com/cathalgarvey/rssfilter'
+    long_description = open('README.md').read(),
+    url='http://github.com/chr15m/fulltextrss'
 )
