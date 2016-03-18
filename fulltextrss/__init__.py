@@ -85,7 +85,7 @@ def builtin_main(feed_url):
             original_html = i.get("description", None) or i.get("summary", None)
             s = bs4.BeautifulSoup(original_html)
             for a in s.find_all('a', href=True):
-                if a.contents == [u"[link]"] and a.get("href"):
+                if a.contents == [u"[link]"] and a.get("href") and not (a.get("href").lower().endswith(".png") or a.get("href").lower().endswith(".gif") or a.get("href").lower().endswith(".jpg")):
                     url = a.get("href")
                     break
         if url:
