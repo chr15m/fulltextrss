@@ -55,7 +55,7 @@ def fetch_and_prepare_feed(feed_url=None):
     object, as required by feedgenerator.
     """
     f = feedparser.parse(feed_url or sys.stdin)
-    if not f['feed'] or not (200 <= f['status'] < 300):
+    if feed_url and (not f['feed'] or not (200 <= f['status'] < 300)):
         raise FeedFetchError()
     f = _cast_feed_to_primitives(f)
     for i in f['entries']:
