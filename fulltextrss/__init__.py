@@ -60,7 +60,7 @@ def fetch_and_prepare_feed(feed_url=None):
     f = _cast_feed_to_primitives(f)
     for i in f['entries']:
         if not isinstance(i.get('pubdate', None), datetime.datetime):
-            i['pubdate'] = datetime.datetime.fromtimestamp(time.mktime(i['published_parsed']))
+            i['pubdate'] = datetime.datetime.fromtimestamp(time.mktime(i.get('published_parsed', i.get('updated_parsed', datetime.datetime.now()))))
     return f
 
 def builtin_main(feed_url):
